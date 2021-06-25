@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic; 
+using System.Data;
+using System.Data.OleDb;
+using System.Linq;
+using System.Web;
+
+namespace myProject.Account
+{
+    public class DbManager
+    {
+       private OleDbConnection _dbConnection;
+
+       public void OpenDbConnection()
+       {
+        _dbConnection = new OleDbConnection {ConnectionString = GetConnectionString()};
+       }
+
+       private string GetConnectionString()
+       {
+        return "Provider=Microsoft.ACE.OLEDB.14.0;Data Source=exercise1.accdb";
+       }
+
+       public void CloseDbConnection()
+       {
+        _dbConnection.Close();
+       }
+
+       public void GetUser()
+       {
+        DataSet myDataSet = new DataSet();
+        var myAdapptor = new OleDbDataAdapter();
+        OleDbCommand command = new OleDbCommand("SELECT * FROM tblUser", _dbConnection);
+        myAdapptor.SelectCommand = command;
+        myAdapptor.Fill(myDataSet, "tblUser");
+       } 
+
+    }
+  }
+
+================================================
+
+To install this download: 1.Download the file by clicking the Download button (above) and saving the file to your hard disk.
+2.Double-click the AccessDatabaseEngine.exe program file on your hard disk to start the setup program.
+3.Follow the instructions on the screen to complete the installation.
+ To use this download: 1.If you are the user of an application, consult your application documentation for details on how to use the appropriate driver.
+ 2.If you are an application developer using OLEDB, set the Provider argument of the ConnectionString property to “Microsoft.ACE.OLEDB.12.0”. 
+
+If you are connecting to Microsoft Office Excel data, add the appropriate Extended Properties of the OLEDB connection string based on the Excel file type: 
+
+File Type (extension)                                       Extended Properties
+ ---------------------------------------------------------------------------------------------
+ Excel 97-2003 Workbook (.xls)                              "Excel 8.0"
+ Excel 2007 Workbook (.xlsx)                                 "Excel 12.0 Xml"
+ Excel 2007 Macro-enabled workbook (.xlsm)          "Excel 12.0 Macro"
+ Excel 2007 Non-XML binary workbook (.xlsb)          "Excel 12.0"
+ 
+
+3.If you are an application developer using ODBC to connect to Microsoft Office Access data, set the Connection String to “Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=path to mdb/accdb file”
+ 4.If you are an application developer using ODBC to connect to Microsoft Office Excel data, set the Connection String to “Driver={Microsoft Excel Driver (*.xls, *.xlsx, *.xlsm, *.xlsb)};DBQ=path to xls/xlsx/xlsm/xlsb file”
+ To remove this download: 
+
+To remove the download file itself, delete the file AccessDatabaseEngine.exe 1.On the Start menu, point to Settings and then click Control Panel. 
+2.Double-click Add/Remove Programs. 
+3.In the list of currently installed programs, select “Microsoft Office Access database engine 2007” and then click Remove or Add/Remove. If a dialog box appears, follow the instructions to remove the program. 
+4.Click Yes or OK to confirm that you want to remove the program.

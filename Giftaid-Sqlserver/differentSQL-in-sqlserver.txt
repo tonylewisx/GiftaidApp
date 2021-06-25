@@ -1,0 +1,3 @@
+create table cust_export select * from customer; -- oracle
+
+Select * into cust_export  from  customer; -- sqlserver

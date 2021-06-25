@@ -1,0 +1,152 @@
+define root pasword in my-default.ini (see text)
+
+[mysqladmin]
+ user = root
+ password = javelin
+[mysql]
+ user = root
+ password = javelin
+[mysqldump]
+ user = root
+ password = javelin
+
+- start service if , not present then type >mysqld --install
+
+login as root to mysql database:
+>mysql -u root -p mysql 
+
+create database;
+>CREATE DATABASE giftaiddb;
+
+create user 
+CREATE USER 'giftaid'@'localhost' IDENTIFIED BY 'giftaid';
+
+then create customer and config tables in giftaiddb n.b giftaiddb.customer .
+
+> create table customer ...etc
+
+insert some rows for testing then remove them later after tests.
+
+
+=======================================================
+
+UPDATE mysql.user SET Password=PASSWORD('javelin') WHERE User='root';
+FLUSH PRIVILEGES;
+
+>mysql -h host -u user -p giftaiddb
+
+UPDATE mysql.user SET Password=PASSWORD('javelin') WHERE User='root'; FLUSH PRIVILEGES;
+
+
+
+
+>SHOW TABLES;
+
+
+mysql> CREATE TABLE pet (name VARCHAR(20), owner VARCHAR(20),
+    -> species VARCHAR(20), sex CHAR(1), birth DATE, death DATE);
+
+
+DESCRIBE table-name;
+
+
+string = "SERVER=localhost;Data Source=MyDatabase;user=root;PASSWORD=MyPassword;"
+
+Provider=MySQLProv;Data Source=myDBname;User Id=myDBUser;Password=myDBPwd"
+
+
+
+CREATE USER 'giftaid'@'localhost' IDENTIFIED BY 'giftaid';
+CREATE USER giftaid@localhost IDENTIFIED BY giftaid;
+
+GRANT ALL ON db1.* TO 'jeffrey'@'localhost';
+grant all on giftaiddb to 'giftaid'@'localhost';
+GRANT SELECT ON db2.invoice TO 'jeffrey'@'localhost';
+GRANT USAGE ON *.* TO 'jeffrey'@'localhost' WITH MAX_QUERIES_PER_HOUR 90;
+
+
+
+OleDbConnection conn = new OleDbConnection( “Provider=MySqlProv;” +  
+
+“Data Source=localhost;” +  
+
+“User id=UserName;” +  
+
+“Password=Secret;”
+
+);
+
+
+
+
+/* 
+Setup code for the online DDL demonstration:
+- Set up some config variables.
+- Create 2 tables that are clones of one of the INFORMATION_SCHEMA tables
+  that always has some data. The "small" table has a couple of thousand rows.
+  For the "big" table, keep doubling the data until it reaches over a million rows.
+- Set up a primary key for the sample tables, since we are demonstrating InnoDB aspects.
+*/ 
+
+set autocommit = 0;
+set foreign_key_checks = 1;
+set global innodb_file_per_table = 1;
+set old_alter_table=0;
+prompt mysql: 
+
+use test;
+
+\! echo "Setting up 'small' table:"
+drop table if exists small_table;
+create table small_table as select * from information_schema.columns;
+alter table small_table add id int unsigned not null primary key auto_increment;
+select count(id) from small_table;
+
+\! echo "Setting up 'big' table:"
+drop table if exists big_table;
+create table big_table as select * from information_schema.columns;
+show create table big_table\G
+
+insert into big_table select * from big_table;
+insert into big_table select * from big_table;
+insert into big_table select * from big_table;
+insert into big_table select * from big_table;
+insert into big_table select * from big_table;
+insert into big_table select * from big_table;
+insert into big_table select * from big_table;
+insert into big_table select * from big_table;
+insert into big_table select * from big_table;
+insert into big_table select * from big_table;
+commit;
+
+alter table big_table add id int unsigned not null primary key auto_increment;
+select count(id) from big_table;
+
+
+Running this code gives this output, condensed for brevity and with the most important points bolded: 
+Setting up 'small' table:
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 1678 rows affected (0.13 sec)
+Records: 1678  Duplicates: 0  Warnings: 0
+
+Query OK, 1678 rows affected (0.07 sec)
+Records: 1678  Duplicates: 0  Warnings: 0
+
++-----------+
+| count(id) |
++-----------+
+|      1678 |
++-----------+
+1 row in set (0.00 sec)
+
+Setting up 'big' table:
+Query OK, 0 rows affected (0.16 sec)
+
+Query OK, 1678 rows affected (0.17 sec)
+Records: 1678  Duplicates: 0  Warnings: 0
+
+*************************** 1. row ***************************
+       Table: big_table
+
+

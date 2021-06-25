@@ -1,0 +1,22 @@
+String connectionString = "Provider=OraOLEDB.Oracle;User ID=giftaid;password=giftaid; Data Source=XE;Persist Security Info=False";
+
+
+string createTableString = "create table cust_full_backup as select * from customer";
+
+
+string SQLUpdateString = "UPDATE customer SET Title ='" + title + "', forename='" + forename + "', surname='" + surname + "', address='" + address + "' , town='" + town + "', postcode='" + postcode + "', telephone='" + telephone + "', email='" + email + "', barcode='" + barcode + "', post_me='" + postme + "', tele_me='" + teleme + "', email_me='" + emailme + "',shop='" + new_shop + "' ,sheetno='" + new_sheetno + "' WHERE sheetno='" + old_sheetno + "' and shop='" + old_shop + "' ";
+
+
+
+if ( Program.DB == Program.ORACLE )
+         
+else if ( Program.DB == Program.ACCESS ) 
+           
+else 
+                 
+   MessageBox.Show("Unknown specified database backend ! ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+
+
+
+

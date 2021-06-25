@@ -1,0 +1,21 @@
+SELECT * FROM information_schema.tables; --- list tables
+
+CREATE LOGIN giftaid 
+    WITH PASSWORD = 'giftaid';
+
+CREATE USER giftaid FOR LOGIN giftaid;
+
+SELECT * FROM sys.database_principals where (type='S' or type = 'U') - list users
+
+
+
+SELECT * FROM information_schema.tables;
+EXECUTE AS LOGIN = 'giftaid';
+select * from customer;
+insert into CUSTOMER  values('2','Trowbridge','09','mr','mario','antoniazzi','1dan-yr-ardd','caerphilly','cf831ts','02920','aol','','Yes','No','No');
+
+
+
+Paul-PC\SQLEXPRESS
+
+LEWIS-PC\MSS10
